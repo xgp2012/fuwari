@@ -41,9 +41,9 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		LinkPreset.主页,
-		LinkPreset.归档,
-		LinkPreset.关于,
+		LinkPreset.Home, 
+		LinkPreset.Archive, 
+		LinkPreset.About, 
 		{
 			name: "B站",
 			url: "https://space.bilibili.com/3546654873488096/?spm_id_from=333.788.upinfo.head.click", // Internal links should not include the base path, as it is automatically added
