@@ -71,6 +71,14 @@ export type ProfileConfig = {
 	}[];
 };
 
+export type SidebarCardConfig = {
+	nodes: {
+		name: string;
+		url: string;
+		description?: string;
+	}[];
+};
+
 export type LicenseConfig = {
 	enable: boolean;
 	name: string;

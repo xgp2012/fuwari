@@ -3,6 +3,7 @@ import type {
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
+	SidebarCardConfig,
 	SiteConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
@@ -81,6 +82,31 @@ export const licenseConfig: LicenseConfig = {
 	enable: true,
 	name: "CC BY-NC-SA 4.0",
 	url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+};
+
+export const sidebarCardConfig: SidebarCardConfig = {
+	nodes: [
+		{
+			name: "灯塔博客",
+			url: "https://xgp2012.github.io",
+			description: "当前站点",
+		},
+		{
+			name: "xgp2012 Blog",
+			url: "https://blog.xgp2012.github.io",
+			description: "技术笔记",
+		},
+		{
+			name: "镜像导航",
+			url: "https://nav.xgp2012.github.io",
+			description: "系统镜像汇总",
+		},
+		{
+			name: "源码托管",
+			url: "https://git.xgp2012.github.io",
+			description: "开源项目仓库",
+		},
+	],
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
