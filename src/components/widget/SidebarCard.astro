@@ -1,13 +1,12 @@
 ---
 import { sidebarCardConfig } from "../../config";
-import type { NodeStatus } from "../../types/config";
 
 const config = sidebarCardConfig;
 ---
 
 <div class="card-base p-3 onload-animation" style="animation-delay: 250ms">
     <div class="font-bold text-lg mb-2 dark:text-neutral-50"> 其他节点</div>
-    <div class="flex flex-col gap-2">
+    <div id="nodes-container" class="flex flex-col gap-2">
         {config.nodes.map((node, index) => (
             <a id={`node-${index}`}
                href={node.url} target="_blank" rel="noopener"
@@ -29,13 +28,10 @@ const config = sidebarCardConfig;
     .status-loading { color: rgb(156 163 175) !important; }
 </style>
 
-<script>
-    const nodes: { index: number; url: string }[] = config.nodes.map((node, i) => ({
-        index: i,
-        url: node.url,
-    }));
+<script is:inline>
+    const NODES = {"nodes":config.nodes};
 
-    async function checkStatus(url: string): Promise<{ statusCode: number | null; error: boolean }> {
+    async function checkStatus(url) {
         try {
             const response = await fetch(url, {
                 method: 'HEAD',
@@ -48,8 +44,6 @@ const config = sidebarCardConfig;
             } else if (response.status >= 400) {
                 return { statusCode: response.status, error: true };
             } else {
-                // no-cors 模式下重定向等状态可能不可信
-                // fallback: 如果状态码正常则认为是 ok
                 return { statusCode: response.status, error: false };
             }
         } catch (e) {
@@ -57,28 +51,26 @@ const config = sidebarCardConfig;
         }
     }
 
-    const promises = nodes.map(async ({ index, url }) => {
+    const promises = NODES.nodes.map((node, index) => {
         const el = document.getElementById(`status-${index}`);
         if (!el) return;
 
         el.classList.add('status-loading');
         el.textContent = '...';
 
-        const result = await checkStatus(url);
-        el.classList.remove('status-loading');
+        checkStatus(node.url).then(result => {
+            el.classList.remove('status-loading');
 
-        if (result.error) {
-            el.classList.add('status-err');
-            el.textContent = '不可达';
-        } else if (result.statusCode === 200) {
-            el.classList.add('status-ok');
-            el.textContent = `200`;
-        } else {
-            el.classList.add('status-err');
-            el.textContent = `${result.statusCode}`;
-        }
+            if (result.error) {
+                el.classList.add('status-err');
+                el.textContent = '不可达';
+            } else if (result.statusCode === 200) {
+                el.classList.add('status-ok');
+                el.textContent = '200';
+            } else {
+                el.classList.add('status-err');
+                el.textContent = `${result.statusCode}`;
+            }
+        });
     });
-
-    // 并行检测所有节点
-    Promise.all(promises);
 </script>
