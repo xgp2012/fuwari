@@ -1,0 +1,35 @@
+---
+interface Props {
+  imageUrl: string;
+  linkUrl: string;
+  title?: string;
+  alt?: string;
+}
+
+const {
+  imageUrl,
+  linkUrl,
+  title = "广告",
+  alt = "广告图片",
+} = Astro.props;
+---
+
+<a href={linkUrl} target="_blank" rel="noopener" class="block group">
+  <div class="card-base p-0 overflow-hidden rounded-[var(--radius-large)] bg-[var(--card-bg)] transition group-hover:shadow-lg">
+    <div class="aspect-video w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+      <img
+        src={imageUrl}
+        alt={alt}
+        loading="lazy"
+        class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+      />
+    </div>
+    {title && (
+      <div class="px-3 py-2 text-center">
+        <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 group-hover:text-[var(--primary)] transition">
+          {title}
+        </span>
+      </div>
+    )}
+  </div>
+</a>
