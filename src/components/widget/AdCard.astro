@@ -1,35 +1,43 @@
 ---
-interface Props {
-  imageUrl: string;
+interface AdItem {
+  image: string;
   linkUrl: string;
   title?: string;
   alt?: string;
 }
 
-const {
-  imageUrl,
-  linkUrl,
-  title = "广告",
-  alt = "广告图片",
-} = Astro.props;
+interface Props {
+  ads: AdItem[];
+}
+
+const { ads } = Astro.props;
 ---
 
-<a href={linkUrl} target="_blank" rel="noopener" class="block group">
-  <div class="card-base p-0 overflow-hidden rounded-[var(--radius-large)] bg-[var(--card-bg)] transition group-hover:shadow-lg">
-    <div class="aspect-video w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800">
-      <img
-        src={imageUrl}
-        alt={alt}
-        loading="lazy"
-        class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-      />
+{ads.length > 0 && (
+<div class="card-base p-3 onload-animation" style="animation-delay: 100ms">
+    <div class="font-bold text-lg mb-2 dark:text-neutral-50"> 特别宣传</div>
+    <div class="flex flex-col gap-2">
+        {ads.map((ad) => (
+            <a href={ad.linkUrl} target="_blank" rel="noopener" class="block group">
+                <div class="rounded-lg bg-neutral-100 dark:bg-neutral-700/50 overflow-hidden transition group-hover:shadow-md">
+                    <div class="aspect-video w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800">
+                        <img
+                            src={ad.image}
+                            alt={ad.alt ?? ad.title ?? "广告图片"}
+                            loading="lazy"
+                            class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                        />
+                    </div>
+                    {ad.title && (
+                        <div class="px-3 py-2">
+                            <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 group-hover:text-[var(--primary)] transition">
+                                {ad.title}
+                            </span>
+                        </div>
+                    )}
+                </div>
+            </a>
+        ))}
     </div>
-    {title && (
-      <div class="px-3 py-2 text-center">
-        <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 group-hover:text-[var(--primary)] transition">
-          {title}
-        </span>
-      </div>
-    )}
-  </div>
-</a>
+</div>
+)}

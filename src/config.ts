@@ -11,7 +11,7 @@ import { LinkPreset } from "./types/config";
 export const siteConfig: SiteConfig = {
 	title: "灯塔博客",
 	subtitle: "随便看看",
-	lang: 'zh_CN',  
+	lang: 'zh_CN',
 	themeColor: {
 		hue: 130, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
 		fixed: false, // Hide the theme color picker for visitors
@@ -42,9 +42,9 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		LinkPreset.Home, 
-		LinkPreset.Archive, 
-		LinkPreset.About, 
+		LinkPreset.Home,
+		LinkPreset.Archive,
+		LinkPreset.About,
 		{
 			name: "B站",
 			url: "https://space.bilibili.com/3546654873488096/?spm_id_from=333.788.upinfo.head.click", // Internal links should not include the base path, as it is automatically added
@@ -61,7 +61,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "B站",
 			icon: "fa6-brands:bilibili", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
+			// You will need to install the corresponding icon set if it's not already installed
 			// `pnpm add @iconify-json/<icon-set-name>`
 			url: "https://space.bilibili.com/3546654873488096",
 		},
@@ -108,6 +108,39 @@ export const sidebarCardConfig: SidebarCardConfig = {
 		},
 	],
 };
+
+export const adsConfig: { image: string; linkUrl: string; title?: string; alt?: string }[] = [
+	{
+		image: "/assets/images/demo-ad.png",
+		linkUrl: "https://example.com",
+		title: "示例广告 1",
+		alt: "示例广告图片 1",
+	},
+	{
+		image: "/assets/images/demo-ad.png",
+		linkUrl: "https://example.com",
+		title: "示例广告 2",
+		alt: "示例广告图片 2",
+	},
+	{
+		image: "/assets/images/demo-ad.png",
+		linkUrl: "https://example.com",
+		title: "示例广告 3",
+		alt: "示例广告图片 3",
+	},
+	{
+		image: "/assets/images/demo-ad.png",
+		linkUrl: "https://example.com",
+		title: "示例广告 4",
+		alt: "示例广告图片 4",
+	},
+	{
+		image: "/assets/images/demo-ad.png",
+		linkUrl: "https://example.com",
+		title: "示例广告 5",
+		alt: "示例广告图片 5",
+	},
+];
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
