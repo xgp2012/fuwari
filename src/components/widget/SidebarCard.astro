@@ -1,10 +1,10 @@
 ---
-import { sidebarCardConfig } from "../config";
+import { sidebarCardConfig } from "../../config";
 
 const config = sidebarCardConfig;
 ---
 <div class="card-base p-3 onload-animation" style="animation-delay: 250ms">
-    <div class="font-bold text-lg mb-2 dark:text-neutral-50">📡 其他节点</div>
+    <div class="font-bold text-lg mb-2 dark:text-neutral-50"> 其他节点</div>
     <div class="flex flex-col gap-2">
         {config.nodes.map(node => (
             <a href={node.url} target="_blank" rel="noopener"
